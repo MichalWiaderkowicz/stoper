@@ -7,6 +7,24 @@ Do konwersji na poprawny format możesz użyć dodatkowej funkcji,
  oczywiście musisz napisać od zera. Jak powinna wyglądać funkcja,
  która otrzymuje czas w miliesekundach, a zwraca czas w formacie HH:mm:ss.ms?
  Bardzo pomocny może być tutaj wujek Google ;) */
-const timer = () => {
-
-}
+const Timer = ({ time }) => {
+    const timeFormat = (milliseconds) => {
+        const seconds = Math.floor(milliseconds / 1000);
+        milliseconds %= 1000;
+        const minutes = Math.floor(milliseconds / 60000);
+        milliseconds %= 60000;
+        const hours = Math.floor(milliseconds / 3600000);
+        milliseconds %= 3600000;
+        const timerHours = String(hours).padStart(2, '0');
+        const timerMinutes = String(minutes).padStart(2, '0');
+        const timerSeconds = String(seconds).padStart(2, '0');
+        const timerMilliseconds = String(milliseconds).padStart(1, '0');
+        return `${timerHours}:${timerMinutes}:${timerSeconds}.${timerMilliseconds}`
+    };
+    return (
+        <div className={styles.timer}>
+            {timeFormat(time)}
+        </div>
+    );
+};
+export default Timer;
