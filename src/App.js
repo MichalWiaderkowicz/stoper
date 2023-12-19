@@ -15,11 +15,12 @@ const App = () => {
 
   const runStopwatch = () => {
     setStopwatch(setInterval(() => {
-      setTime(prevValue => prevValue + 100);
-    }, 100))
+      setTime(prevValue => prevValue + 10);
+    }, 10))
   };
   const holdStopwatch = () => {
-    clearTimeout(stopwatch);
+    clearInterval(stopwatch);
+    setStopwatch(null);
   };
   const clearStopwatch = () => {
     holdStopwatch();
@@ -36,7 +37,7 @@ const App = () => {
     <Container>
       <Hero />
       <Timer time={time} />
-      <Button onClick={runStopwatch}>START</Button>
+      <Button isDisabled={!!stopwatch} onClick={runStopwatch}>START</Button>
       <Button onClick={holdStopwatch}>STOP</Button>
       <Button onClick={clearStopwatch}>RESET</Button>
     </Container>
